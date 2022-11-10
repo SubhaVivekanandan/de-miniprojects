@@ -1,7 +1,13 @@
 import sys
 
 # creating product list
-product_list = ["Coke Zero", "Pepsi", "Fanta"]
+# product_list = ["Coke Zero", "Pepsi", "Fanta"]
+product_list = []
+with open('./Week3/products.txt', 'r') as file:
+    for line in file:
+        data = line.rstrip()
+        product_list.append(data)
+    
 
 # function for creating main menu
 def main_menu():
