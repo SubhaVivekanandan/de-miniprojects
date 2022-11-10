@@ -1,15 +1,11 @@
 import sys
 
 # creating product list
-# product_list = ["Coke Zero", "Pepsi", "Fanta"]
-product_list = []
-with open('./Week3/products.txt', 'r') as file:
-    for line in file:
-        data = line.rstrip()
-        product_list.append(data)
-    
+product_list = ["Coke Zero", "Pepsi", "Fanta"]
 
 # function for creating main menu
+
+
 def main_menu():
     print("Main Menu")
     print('0.Exit \n 1.Main Menu 2.Order List')
@@ -36,7 +32,7 @@ def product_menu():
         new_product = input('Enter new product name:')
         product_list.append(new_product)
         print(product_list)
-        
+
     elif option == 3:
         for product in product_list:
             index = product_list.index(product)
@@ -99,7 +95,8 @@ def orders_menu():
         orders_list.append(new_order)
         print(orders_list)
     elif option == 3:
-        user_input_index = int(input("Enter the order index value for updating an existing status value:"))
+        user_input_index = int(
+            input("Enter the order index value for updating an existing status value:"))
         print(orders_list[user_input_index]['status'])
         customer_status = input('Enter the customer status:')
         orders_list[user_input_index]['status'] = customer_status
@@ -107,9 +104,11 @@ def orders_menu():
     elif option == 4:
         print('wip')
     elif option == 5:
-        user_input_index = int(input("Enter the order index value for deleting the orders:"))
+        user_input_index = int(
+            input("Enter the order index value for deleting the orders:"))
         del orders_list[user_input_index]
         print(orders_list)
     orders_menu()
+
 
 main_menu()
