@@ -4,8 +4,6 @@ import sys
 product_list = ["Coke Zero", "Pepsi", "Fanta"]
 
 # function for creating main menu
-
-
 def main_menu():
     print("Main Menu")
     print('0.Exit \n 1.Main Menu 2.Order List')
@@ -106,5 +104,6 @@ def orders_menu():
         user_input_index = int(input("Enter the order index value for deleting the orders:"))
         del orders_list[user_input_index]
         print(orders_list)
+    orders_menu()
 
 main_menu()
