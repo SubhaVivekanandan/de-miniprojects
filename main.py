@@ -67,6 +67,11 @@ def product_menu():
         new_product = input('Enter new product name:')
         products_list.append(new_product)
         print(products_list)
+        # Open a file with access mode 'a'
+        file_object = open('products.txt', 'a')
+        file_object.write("\n"+ new_product)
+        # Close the file
+        file_object.close()
     elif option == 3:
         for product in products_list:
             index = products_list.index(product)
