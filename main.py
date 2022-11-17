@@ -93,6 +93,68 @@ def print_couriers_list():
 
 
 # function for creating main menu
+def main_menu_options():
+    console.print(
+        '''
+*************************************[bold yellow]Main Menu!![/bold yellow]************************************
+[bold green]
+0.Exit
+1.Product Menu
+2.Courier Menu
+3.Order Menu
+[/bold green]
+************************************************************************************
+        '''
+    )
+
+#sub menu --- Products
+def product_menu_options():
+    console.print(
+        '''
+*************************************[bold yellow]Product Menu!![/bold yellow]************************************
+[bold green]
+0.Return to main menu
+1.Print list of products
+2.Add a new product to list
+3.Update exisisting product in the list
+4.Delete a product from list
+[/bold green]
+************************************************************************************
+        '''
+    )
+
+#sub menu --- Orders
+def order_menu_options():
+    console.print(
+        '''
+*************************************[bold yellow]Order Menu!![/bold yellow]************************************
+[bold green]
+0.Return to main menu
+1.Print the existing  Order List
+2.Add a new order to list
+3.Update order status in the list
+4.Add/Update existing order list
+5.Delete a product from list
+[/bold green]
+************************************************************************************
+        '''
+    )
+
+#sub menu --- Couriers
+def courier_menu_options():
+    console.print(
+        '''
+*************************************[bold yellow]Courier Menu!![/bold yellow]************************************
+[bold green]
+0.Return to main menu
+1.Print the existing  Courier List
+2.Add a new courier to list
+3.Update courier in the list
+4.Delete a courier from list
+[/bold green]
+************************************************************************************
+        '''
+    )
 
 
 def main():
@@ -104,7 +166,6 @@ def main():
             '\n[bold yellow]!Exiting Main menu Application!![/bold yellow]****************************************************')
         sys.exit()  # exits from main menu
     elif option == 1:
-        product_menu_options()
         product_menu()  # calls fn for displaying product menu
     elif option == 2:
         courier_menu()  # calls fn for displaying courier menu
