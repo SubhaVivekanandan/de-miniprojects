@@ -28,13 +28,19 @@ with open('./couriers.csv', 'r') as file:
 
 #saving in orders.csv file    
 def save_orders_file():
+    success = False
     order_field_names = ['customer_name',
                          'customer_address', 'customer_phone', 'status', 'courier', 'items']
-    with open('./orders.csv', 'w') as file:
-        writer = csv.DictWriter(file, fieldnames=order_field_names)
-        writer.writeheader()
-        writer.writerows(orders_list)
+    try:
+        with open('./orders.csv', 'w') as file:
+            writer = csv.DictWriter(file, fieldnames=order_field_names)
+            writer.writeheader()
+            writer.writerows(orders_list)
+            success = True
+    except FileNotFoundError:
+        success = False
     file.close()
+    return success
 
 #printing order.csv in table format
 def print_orders_list():
@@ -44,12 +50,18 @@ def print_orders_list():
 
 #saving in products.csv file 
 def save_products_file():
+    success = False
     product_field_names = ['name', 'price']
-    with open('./products.csv', 'w') as file:
-        writer = csv.DictWriter(file, fieldnames=product_field_names)
-        writer.writeheader()
-        writer.writerows(products_list)
+    try:
+        with open('./products.csv', 'w') as file:
+            writer = csv.DictWriter(file, fieldnames=product_field_names)
+            writer.writeheader()
+            writer.writerows(products_list)
+            success = True
+    except FileNotFoundError:
+        success = False
     file.close()
+    return success
 
 #printing product.csv in table format
 def print_products_list():
@@ -57,15 +69,20 @@ def print_products_list():
     rows = [x.values() for x in products_list]
     print(tabulate.tabulate(rows, header, tablefmt='fancy_outline'))
     
-
 #saving in couriers.csv file 
 def save_couriers_file():
+    success = False
     couriers_field_names = ['name', 'phone_number']
-    with open('./couriers.csv', 'w') as file:
-        writer = csv.DictWriter(file, fieldnames=couriers_field_names)
-        writer.writeheader()
-        writer.writerows(couriers_list)
+    try:
+        with open('./couriers.csv', 'w') as file:
+            writer = csv.DictWriter(file, fieldnames=couriers_field_names)
+            writer.writeheader()
+            writer.writerows(couriers_list)
+            success = True
+    except FileNotFoundError:
+        success = False
     file.close()
+    return success
 
 #printing couriers 
 def print_couriers_list():
@@ -149,16 +166,33 @@ def main():
             '\n[bold yellow]!Exiting Main menu Application!![/bold yellow]****************************************************')
         sys.exit()  # exits from main menu
     elif option == 1:
-        product_menu_options()
         product_menu()  # calls fn for displaying product menu
     elif option == 2:
         courier_menu()  # calls fn for displaying courier menu
     elif option == 3:
         orders_menu()  # calls fn for displaying orders menu
 
+def get_productList():
+    return products_list
+
+def get_courierList():
+    return couriers_list
+
+def get_orderList():
+    return orders_list
+
+def get_new_product():
+    new_product_name = input('Enter new product name: ')
+    new_product_price = input('Enter new product price: ')
+    return new_product_name, new_product_price
+
+def get_option():
+    enter_option = int(input("Enter your option 0-4 : "))
+    return enter_option
 
 def product_menu():
-    option = int(input("Enter your option 0-4 : "))
+    product_menu_options()
+    option = get_option()
     console.print(
         '\n*******************************************************************************')
     print("You have selected :", option)
@@ -166,15 +200,12 @@ def product_menu():
         main()
     elif option == 1:
         print_products_list()
-        product_menu_options()
     elif option == 2:
-        new_product_name = input('Enter new product name: ')
-        new_product_price = input('Enter new product price: ')
+        new_product_name, new_product_price = get_new_product()
         new_dict = {'name': new_product_name, 'price': new_product_price}
         products_list.append(new_dict)
         save_products_file()
         print_products_list()
-        product_menu_options()
     elif option == 3:
         for product in products_list:
             index = products_list.index(product)
@@ -190,7 +221,6 @@ def product_menu():
                 break
         save_products_file()
         print_products_list()
-        product_menu_options()
     elif option == 4:
         for product in products_list:
             index = products_list.index(product)
@@ -201,7 +231,6 @@ def product_menu():
         del products_list[user_input_index]
         save_products_file()
         print_products_list()
-        product_menu_options()
     product_menu()
     
 def courier_menu():
@@ -248,7 +277,6 @@ def courier_menu():
         print_couriers_list()
     courier_menu()
 
-
 def orders_menu():
     order_menu_options()
     option = int(input("Enter your option 0-5 :"))
@@ -274,7 +302,12 @@ def orders_menu():
         input_product_index_values = [int(x) for x in input("Enter multiple values\n").split(',')]
         product_index_values = ', '.join(str(x) for x in input_product_index_values)
         
-        # //write courier index value
+        for courier in couriers_list:
+            index = couriers_list.index(courier)
+            console.print(
+                f" The [bold green]{courier} [/bold green]index value is : [bold green]{index}[/bold green]")
+        user_input_courier_index = int(
+            input("Enter the courier index value for deletion : "))
         
         status = "Preparing"
         new_order = {
@@ -282,7 +315,7 @@ def orders_menu():
             "customer_address": customer_address,
             "customer_phone": customer_phone_number,
             "status": status,
-            "courier": 1,
+            "courier": user_input_courier_index,
             "items": product_index_values
             
         }
