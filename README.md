@@ -3,7 +3,7 @@ Mini Project using Python programming
 
 Client Requirement:
 -maintaining a collection of products and couriers.
--When a customer makes a new order or other changes are done, should be saved in the system.
+-When a customer makes a new order or other changes are done, everything should be saved in the system.
 -On exiting the app, all data should be persisted and not lost.
 -On starting the app, I need to load all persisted data.
 -I need to be sure my app has been tested and proven to work well.

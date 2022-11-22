@@ -130,11 +130,11 @@ def order_menu_options():
 *************************************[bold yellow]Order Menu!![/bold yellow]************************************
 [bold green]
 0.Return to main menu
-1.Print the existing  Order List
+1.Print list of Orders
 2.Add a new order to list
 3.Update order status in the list
-4.Add/Update existing order list
-5.Delete a product from list
+4.Update existing order list
+5.Delete a Order from list
 [/bold green]
 ************************************************************************************
         '''
@@ -147,7 +147,7 @@ def courier_menu_options():
 *************************************[bold yellow]Courier Menu!![/bold yellow]************************************
 [bold green]
 0.Return to main menu
-1.Print the existing  Courier List
+1.Print list of Couriers
 2.Add a new courier to list
 3.Update courier in the list
 4.Delete a courier from list
@@ -299,7 +299,7 @@ def orders_menu():
             console.print(
                 f" The [bold green]{product} [/bold green]index value is : [bold green]{index}[/bold green]")
             
-        input_product_index_values = [int(x) for x in input("Enter multiple values\n").split(',')]
+        input_product_index_values = [int(x) for x in input("Enter product index values :\n").split(',')]
         product_index_values = ', '.join(str(x) for x in input_product_index_values)
         
         for courier in couriers_list:
@@ -307,7 +307,7 @@ def orders_menu():
             console.print(
                 f" The [bold green]{courier} [/bold green]index value is : [bold green]{index}[/bold green]")
         user_input_courier_index = int(
-            input("Enter the courier index value for deletion : "))
+            input("Enter the courier index value : "))
         
         status = "Preparing"
         new_order = {
@@ -342,7 +342,7 @@ def orders_menu():
             print(f"the {item} is value {index}")
         user_input_index = int(input("Enter the index value:"))
         for key, value in orders_list[user_input_index].items():
-            property_values = input('Enter the value:')
+            property_values = input('Enter the new property value :')
             if property_values:
                 orders_list[user_input_index][key] = property_values
             else:
